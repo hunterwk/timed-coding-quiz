@@ -1,14 +1,20 @@
-questions = ["Commonly used data types DO NOT include:", 
-            "The condition in an if / else statement is enclosed within ____.", 
-            "Arrays in JavaScript can be used to store _____.",
-            "String values must be enclosed within _____ when being assigned to variables.",
-            "A very useful tool used during development and debugging for printing content to the debugger is:"
-        ]; //Array of questions 
-answers = ["strings", "booleans", "alerts", "numbers"], // answers assigned to arrays with variables equal to # of question arrays
-        ["quotes", "curly brackets", "parenthesis", "square brackets"],
-        ["numbers and strings", "other arrays", "booleans", "all of the above"],
-        ["commas", "curly brackets", "quotes", "parenthesis"],
-        ["Javascript", "terminal / bash", "for loops", "console.log"];
+questions = [{question: "Commonly used data types DO NOT include:",
+            answers: ["strings", "booleans", "alerts", "numbers"],
+            correct: "alerts"},
+            {question: "The condition in an if / else statement is enclosed within ____.",
+            answers: ["quotes", "curly brackets", "parenthesis", "square brackets"],
+            correct: "parenthesis"},
+            {question: "Arrays in JavaScript can be used to store _____.",
+            answers: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+            correct:"all of the above"},
+            {question: "String values must be enclosed within _____ when being assigned to variables.",
+            answers: ["commas", "curly brackets", "quotes", "parenthesis"],
+            correct:"quotes"},
+            {question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+            answers: ["Javascript", "terminal / bash", "for loops", "console.log"],
+            correct:"console.log"}
+        ]; //Convert questions and answers into object
+
 timerDisplay = document.querySelector("#timer");
 timerDown = 60; //starting time at 60 seconds
 questionDisplay = document.querySelector("#question-text")
@@ -27,7 +33,7 @@ function startTimer() {
     timerInterval = setInterval(function() {
     timerDown--;
     timerDisplay.textContent = timerDown + " seconds remaining.";
-    if(timerDown === 0) {
+    if(timerDown <= 0) {
         console.log("Timer is Over")
         clearInterval(timerInterval);
         timerDisplay.textContent = " ";
@@ -39,20 +45,18 @@ function startTimer() {
 function actualQuiz() {
     var quizShow = document.querySelector("#question-card");
     quizShow.setAttribute("style", "display: block");
-    //while (timerDown > 0) {
-        //for (i = 0; i <= questions.length; i++) { //Assigns the question to the header of the card
-            questionDisplay.textContent = questions[0];
+    
+    for (i = 0; i <= questions.length; i++) { //Assigns the question to the header of the card
+        questionDisplay.textContent = questions[0];
+    }    
 
-        for (i = 0; i <= answers.length; i++){
-            for (i = 0; i <= answers[i].length; i++) {   
+    for (i = 0; i <= answers.length; i++){
+        for (i = 0; i <= answers[i].length; i++) {   
             answersLi = document.createElement("li")
-            answersLi.textContent = answers[i]
+            answersLi.textContent = answers[i];
             answersText.appendChild(answersLi);
-            }
-        }    
-
-      //  }  ;
-   // }
+        }
+    }    
 };
     
 
