@@ -19,6 +19,9 @@ timerDisplay = document.querySelector("#timer");
 timerDown = 60; //starting time at 60 seconds
 questionDisplay = document.querySelector("#question-text")
 answersText = document.querySelector("#answers")
+totalScore = 0;
+
+
 
 document.getElementById("startbtn").addEventListener("click", beginQuiz); //begin quiz on start button click
 
@@ -37,7 +40,7 @@ function startTimer() {
         console.log("Timer is Over")
         clearInterval(timerInterval);
         timerDisplay.textContent = " ";
-        //enter intials for score function here
+        //outoftime();
     };
     }, 1000); //decreasing timer one second at a time
 }
@@ -45,19 +48,45 @@ function startTimer() {
 function actualQuiz() {
     var quizShow = document.querySelector("#question-card");
     quizShow.setAttribute("style", "display: block");
+    questionDisplay.textContent = questions[0].question;
+    for (i=0; i < questions[0].answers.length; i++){
+        answersLi = document.createElement("li");
+        answerButton = document.createElement("button");
+        answerButton.textContent = questions[0].answers[i];
+        answerButton.setAttribute("class","answer-button");
+        answersText.appendChild(answersLi);
+        answersLi.appendChild(answerButton);
+    };
+    function answerCheck() {
+        if (event.target.textContent === questions[0].correct) {
+            totalScore++;
+            console.log(totalScore++);
+            textDisplay = document.getElementById("answer-display");
+            textDisplay.textContent = "Correct!"
+            
+        } else {
+            timerDown =  (timerDown - 10);
+            textDisplay = document.getElementById("answer-display");
+            textDisplay.textContent = "WRONG!"
+        } 
+    }
+    document.getElementsByClassName("answer-button").addEventListener("click", answerCheck());
     
-    for (i = 0; i <= questions.length; i++) { //Assigns the question to the header of the card
-        questionDisplay.textContent = questions[0];
-    }    
+        
+    
 
-    for (i = 0; i <= answers.length; i++){
-        for (i = 0; i <= answers[i].length; i++) {   
-            answersLi = document.createElement("li")
-            answersLi.textContent = answers[i];
-            answersText.appendChild(answersLi);
-        }
-    }    
-};
+
+
+
+
+
+
+    
+    
+}
+    
+      
+
     
 
 
