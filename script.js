@@ -74,23 +74,21 @@ function actualQuiz() {
             answersText.appendChild(answersLi);
             answersLi.appendChild(answerButton);
         };
-        answersText.addEventListener("click", function (event) {
+        function answerChecker1 (event) {
             if (event.target.matches(".answer-button")) {
                 if (event.target.textContent === questions[0].correct) {
                     totalScore++
-                    console.log(totalScore)
                     textDisplay.textContent = "correct!"
-                    console.log(event)
                 } else if (event.target.textContent != questions[0].correct) {
                     timerReducer()
                     textDisplay.textContent = "WRONG!"
-                    console.log(event)
                 }
             }
             answersText.textContent = " ";
+            answersText.removeEventListener("click", answerChecker1)
             quizTwo()
-        });
-        
+        };
+       answersText.addEventListener("click", answerChecker1);
     };
     function quizTwo() {
         questionDisplay.textContent = questions[1].question;
@@ -102,23 +100,21 @@ function actualQuiz() {
             answersText.appendChild(answersLi);
             answersLi.appendChild(answerButton);
         };
-        answersText.addEventListener("click", function (event) {
+        function answerChecker2 (event) {
             if (event.target.matches(".answer-button")) {
                 if (event.target.textContent === questions[1].correct) {
                     totalScore++
-                    console.log(timerDown)
                     textDisplay.textContent = "correct!"
-                    console.log(event)
                 } else {
                     timerReducer();
                     textDisplay.textContent = "WRONG!"
-                    console.log(event)
                 }
             }
             answersText.textContent = " ";
+            answersText.removeEventListener("click", answerChecker2);
             quizThree();
-        });
-        
+        };
+        answersText.addEventListener("click", answerChecker2);
     };
     function quizThree() {
         questionDisplay.textContent = questions[2].question;
@@ -130,22 +126,21 @@ function actualQuiz() {
             answersText.appendChild(answersLi);
             answersLi.appendChild(answerButton);
         };
-        answersText.addEventListener("click", function (event) {
+        function answerChecker3 (event) {
             if (event.target.matches(".answer-button")) {
                 if (event.target.textContent === questions[2].correct) {
                     totalScore++
-                    console.log(timerDown)
                     textDisplay.textContent = "correct!"
-                    console.log(event)
                 } else {
                     timerDown -= 10;
-                    textDisplay.textContent = "WRONG!"
-                    console.log(event)
+                    textDisplay.textContent = "WRONG!"   
                 }
             }
             answersText.textContent = " ";
+            answersText.removeEventListener("click", answerChecker3);
             quizFour();
-        });
+        };
+        answersText.addEventListener("click", answerChecker3);
     };
     function quizFour() {
         questionDisplay.textContent = questions[3].question;
@@ -157,22 +152,21 @@ function actualQuiz() {
             answersText.appendChild(answersLi);
             answersLi.appendChild(answerButton);
         };
-        answersText.addEventListener("click", function (event) {
+        function answerChecker4 (event) {
             if (event.target.matches(".answer-button")) {
                 if (event.target.textContent === questions[3].correct) {
                     totalScore++
-                    console.log(timerDown)
                     textDisplay.textContent = "correct!"
-                    console.log(event)
                 } else {
                     timerDown -= 10;
                     textDisplay.textContent = "WRONG!"
-                    console.log(event)
                 }
             }
             answersText.textContent = " ";
+            answersText.removeEventListener("click", answerChecker4);
             quizFive();
-        });
+        };
+        answersText.addEventListener("click", answerChecker4);
     };
     function quizFive() {
         questionDisplay.textContent = questions[4].question;
@@ -184,21 +178,19 @@ function actualQuiz() {
             answersText.appendChild(answersLi);
             answersLi.appendChild(answerButton);
         };
-        answersText.addEventListener("click", function (event) {
+         function answerChecker5 (event) {
             if (event.target.matches(".answer-button")) {
                 if (event.target.textContent === questions[4].correct) {
                     totalScore++
-                    console.log(timerDown)
                     textDisplay.textContent = "correct!"
-                    console.log(event)
                 } else {
                     timerDown = (timerDown - 10);
                     textDisplay.textContent = "WRONG!"
-                    console.log(event)
                 }
             }
             answersText.textContent = " ";
-            
-        });
+            answersText.removeEventListener("click", answerChecker5);
+        };
+        answersText.addEventListener("click", answerChecker5);
     };
 };
