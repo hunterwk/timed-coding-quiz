@@ -31,12 +31,22 @@ questionDisplay = document.querySelector("#question-text")
 answersText = document.querySelector("#answers")
 totalScore = 0; // starting score
 textDisplay = document.getElementById("answer-display"); //will target the p tag to display to user whether click selection was correct or wrong
+var mainHide = document.getElementById("main")
+var questionHide = document.getElementById("question-card")
+var formHide = document.getElementById("highscore")
+formHide.style.display = "none";
+initialForm = document.querySelector("#initial-form");
+initialText = document.querySelector("#user-initials");
+highScores = [] //blank array for user submitted scores
+scoreList = document.querySelector("#score-list");
+
 
 
 document.getElementById("startbtn").addEventListener("click", beginQuiz); //begin quiz on start button click
 
+
+
 function beginQuiz() {
-    var mainHide = document.getElementById("main")
     mainHide.style.display = "none";
     startTimer();
     actualQuiz();
@@ -50,7 +60,7 @@ function startTimer() {
             console.log("Timer is Over")
             clearInterval(timerInterval);
             timerDisplay.textContent = " ";
-            //outoftime();
+            quizHide();
         };
     }, 1000); //decreasing timer one second at a time
 }
@@ -58,6 +68,37 @@ function startTimer() {
 function timerReducer() {
     timerDown -= 10;
     console.log(timerDown);
+}
+
+function quizHide(){
+    questionHide.style.display = "none";
+    formHide.style.display = "block";
+    timerDisplay.style.display = "none";
+
+}
+function renderScores (){
+    scoreList.innerHTML = "";
+    for (var i=0; i < highScores.length; i++) {
+        var scoreText = highScores[i];
+        var scoreLi = document.createElement("li");
+        scoreLi.textContent = scoreText;
+        scoreList.appendChild(scoreLi);
+    }
+};
+
+
+function scoreSubmit(){
+    initialForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        actualInitial = initialText.value.trim();
+        if (actualInitial === "") {
+            alert("Please enter your initials");
+            return;
+        }
+        highScores.push(actualInitial);
+        initialText.value = " ";
+        renderScores();
+    })
 }
 
 function actualQuiz() {
@@ -192,5 +233,8 @@ function actualQuiz() {
             answersText.removeEventListener("click", answerChecker5);
         };
         answersText.addEventListener("click", answerChecker5);
+        quizHide();
+        scoreSubmit();
+        renderScores();
     };
 };
